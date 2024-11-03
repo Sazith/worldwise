@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function PageNav() {
+const NavbarPage = () => {
   return (
     <nav>
       <ul>
@@ -8,14 +8,14 @@ function PageNav() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/pricing">Pricing</Link>
+          <Link to="../pages/Pricing.jsx">Pricing</Link>
         </li>
         <li>
-          <Link to="/product">Product</Link>
+          <Link to="../pages/Product.jsx">Product</Link>
         </li>
       </ul>
     </nav>
   );
-}
+};
 
-export default PageNav;
+export default NavbarPage;

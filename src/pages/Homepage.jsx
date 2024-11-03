@@ -1,10 +1,10 @@
-import { PageNav } from "../Components/PageNav";
 
-export const Homepage = () => {
+const Homepage = () => {
   return (
     <div>
-      <PageNav />
       Homepage
     </div>
-  );
-};
+  )
+}
+
+export default Homepage

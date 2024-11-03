@@ -1,3 +1,10 @@
-export default function Product() {
-  return <div>Product</div>;
+
+const Product = () => {
+  return (
+    <div>
+      <p>Product page</p>
+    </div>
+  )
 }
+
+export default Product
