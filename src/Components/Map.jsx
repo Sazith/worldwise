@@ -1,11 +1,12 @@
-
-
-function Map() {
+import styles from './Map.module.css'
+const Map = () => {
   return (
-    <div>
-      
+    <div className={styles.mapContainer}>
+      Map
     </div>
   )
 }
 
 export default Map
+
+
