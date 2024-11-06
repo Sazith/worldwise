@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Homepage from "./pages/Homepage";
@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import CityList from "./Components/CityList";
 import CountryList from "./Components/CountryList";
 import "./index.css";
+import City from "./Components/City";
+import Form from "./Components/Form";
 
 const BASE_URL =
   "https://6729bd6c6d5fa4901b6e2735.mockapi.io/api/cities/cityList";
@@ -43,10 +45,11 @@ function App() {
           <Route path="/product" element={<Product />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="app" element={<AppLayout />}>
-            <Route index element={<CityList cities={cities} isLoading={isLoading}/>} />
+            <Route index element={<Navigate replace to="cities"/>} />
             <Route path="cities" element={<CityList cities={cities} isLoading={isLoading}/>} />
+            <Route path="cities/:id" element={<City/>}/>
             <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading}/>} />
-            <Route path="form" element={<p>Form</p>} />
+            <Route path="form" element={<Form/>} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
