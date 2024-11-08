@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
 import { useCities } from "../Contexts/CitiesContext";
 import BackButton from "./BackButton";
+import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -14,16 +17,21 @@ const formatDate = (date) =>
 
 function City() {
 
-  const { cities, isLoading } = useCities();
   const { id } = useParams();
+
+  const {currentCity,getCity,isLoading} = useCities()
+  useEffect(function(){
+    getCity(id)
+  },[id])
 
   const [searchParam, setSearchParam] = useSearchParams();
   const lat = searchParam.get("lat");
   const lng = searchParam.get("lng");
 
-  const currentCity = cities.find((c) => c.id == id);
 
   const { cityName, emoji, date, notes } = currentCity;
+
+  if(isLoading) return <Spinner/>
 
   return (
     <div className={styles.city}>
