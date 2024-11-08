@@ -10,7 +10,8 @@ function Sidebar() {
       <Outlet/>
       <footer className={styles.footer}>
         <p className={styles.copyright}>
-          &copy; Copyright {new Date().getFullYear()} by WorldWise Inc.
+          &copy; Copyright {new Date().getFullYear()} by 
+           <a href="https://github.com/Sazith" target='_blank' rel="noreferrer">MD Sazith Shyonton.</a> 
         </p>
       </footer>
     </div>

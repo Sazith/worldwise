@@ -13,19 +13,22 @@ import { useEffect, useState } from "react";
 import { useCities } from "../Contexts/CitiesContext";
 import { useGeolocation } from "../hooks/UseGeolocation";
 import Button from "./Button";
+import { useUrlPosition } from "../hooks/UseUrlPosition";
 
 const Map = () => {
-  const [searchParam, setSearchParam] = useSearchParams();
+ 
   const { cities } = useCities();
   const {
     isLoading: isLoadingPosition,
-    position: geoLoacationPosition,
+    position: geoLocationPosition,
     getPosition,
   } = useGeolocation();
 
+
+  const [mapLat, mapLng] =useUrlPosition()
+
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  const mapLat = searchParam.get("lat");
-  const mapLng = searchParam.get("lng");
+ 
 
   useEffect(() => {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
@@ -33,19 +36,19 @@ const Map = () => {
 
   useEffect(() => {
     if (
-      geoLoacationPosition &&
-      geoLoacationPosition.lat &&
-      geoLoacationPosition.lng
+      geoLocationPosition &&
+      geoLocationPosition.lat &&
+      geoLocationPosition.lng
     ) {
-      setMapPosition([geoLoacationPosition.lat, geoLoacationPosition.lng]);
+      setMapPosition([geoLocationPosition.lat, geoLocationPosition.lng]);
     } else {
       // Handle error, e.g., use a fallback location or show a message
     }
-  }, [geoLoacationPosition]);
+  }, [geoLocationPosition]);
 
   return (
     <div className={styles.mapContainer}>
-      {!geoLoacationPosition && (
+      {!geoLocationPosition && (
         <Button type="position" onClick={getPosition}>
           {isLoadingPosition ? "...Loading" : "Use your position"}
         </Button>
