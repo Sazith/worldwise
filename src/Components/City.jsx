@@ -1,6 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
+import { useCities } from "../Contexts/CitiesContext";
+import BackButton from "./BackButton";
+import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -12,26 +17,26 @@ const formatDate = (date) =>
 
 function City() {
 
-  const {id} = useParams();
-  const [searchParam, setSearchParam] =useSearchParams();
+  const { id } = useParams();
 
-  const lat = searchParam.get('lat');
-  const lng = searchParam.get('lng');
+  const {currentCity,getCity,isLoading} = useCities()
+  useEffect(function(){
+    getCity(id)
+  },[id])
 
-  // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+  const [searchParam, setSearchParam] = useSearchParams();
+  const lat = searchParam.get("lat");
+  const lng = searchParam.get("lng");
+
 
   const { cityName, emoji, date, notes } = currentCity;
+
+  if(isLoading) return <Spinner/>
 
   return (
     <div className={styles.city}>
       <div className={styles.row}>
-        <h6>City name {id} </h6>
+        <h6>City name </h6>
         <h3>
           <span>{emoji}</span> {cityName}
         </h3>
@@ -60,9 +65,7 @@ function City() {
         </a>
       </div>
 
-      <div>
-        {/* <ButtonBack /> */}
-      </div>
+      <div><BackButton/></div>
     </div>
   );
 }

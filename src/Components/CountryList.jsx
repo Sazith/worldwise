@@ -29,7 +29,7 @@ function CountryList() {
       {
         // eslint-disable-next-line react/prop-types
         countries.map((country) => (
-          <CountryItem country={country} key={country.id} />
+          <CountryItem country={country} key={country.name} />
         ))
       }
     </ul>
